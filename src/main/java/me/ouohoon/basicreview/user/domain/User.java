@@ -31,5 +31,6 @@ public class User {
     public User(SignUpRequest request, PasswordEncoder encoder) {
         this.nickname = request.getNickname();
         this.password = encoder.encode(request.getPassword());
+        this.email = request.getEmail();
     }
 }

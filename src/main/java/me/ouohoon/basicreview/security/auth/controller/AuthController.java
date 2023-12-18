@@ -1,6 +1,7 @@
 package me.ouohoon.basicreview.security.auth.controller;
 
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import me.ouohoon.basicreview.global.dto.BaseResponse;
 import me.ouohoon.basicreview.security.auth.request.LoginRequest;
@@ -23,14 +24,14 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<BaseResponse<UserResponse>> login(@RequestBody LoginRequest request) {
-        UserResponse user = authService.login(request);
-
-        HttpHeaders headers = new HttpHeaders();
+    public ResponseEntity<BaseResponse<UserResponse>> login(
+            @RequestBody LoginRequest request,
+            HttpServletResponse response
+    ) {
+        UserResponse user = authService.login(request, response);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .headers(headers)
                 .body(BaseResponse.success(user));
     }
 }

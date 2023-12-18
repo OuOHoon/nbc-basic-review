@@ -31,7 +31,7 @@ spring:
     port: 587
     username: ${mail-username}
     password: ${mail-password}
-    from: basic-review-project
+    from: basic-review@proejct.com
     properties:
       mail:
         smtp:
@@ -39,6 +39,10 @@ spring:
           timeout: 5000
           starttls.required: true
           starttls.enable: true
+
+jwt:
+  secret:
+    key: ${jwt-secret-key}
 
 ---
 
@@ -68,7 +72,7 @@ spring:
     port: 587
     username: ${mail-username}
     password: ${mail-password}
-    from: basic-review-project
+    from: basic-review@proejct.com
     properties:
       mail:
         smtp:
@@ -76,3 +80,7 @@ spring:
           timeout: 5000
           starttls.required: true
           starttls.enable: true
+
+jwt:
+  secret:
+    key: bmV3c2ZlZWQtand0LXNlY3JldC1rZXluZXdzZmVlZC1qd3Qtc2VjcmV0LWtleQ==

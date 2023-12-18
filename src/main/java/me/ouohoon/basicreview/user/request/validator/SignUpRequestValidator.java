@@ -46,7 +46,7 @@ public class SignUpRequestValidator implements ConstraintValidator<ValidSignUpRe
     }
 
     private boolean validatePassword(String nickname, String password) {
-        return password != null && !password.matches("[%s]+".formatted(nickname)) && password.length() >= 4;
+        return password != null && !password.contains(nickname) && password.length() >= 4;
     }
 
     private boolean validatePasswordConfirm(String password, String passwordConfirm) {
