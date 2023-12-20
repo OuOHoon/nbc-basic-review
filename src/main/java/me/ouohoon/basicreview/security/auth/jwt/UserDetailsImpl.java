@@ -1,12 +1,14 @@
 package me.ouohoon.basicreview.security.auth.jwt;
 
 
+import lombok.Getter;
 import me.ouohoon.basicreview.user.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Getter
 public class UserDetailsImpl implements UserDetails {
 
     private final User user;

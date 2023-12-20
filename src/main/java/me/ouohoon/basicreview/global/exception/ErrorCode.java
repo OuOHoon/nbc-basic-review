@@ -13,6 +13,21 @@ public enum ErrorCode {
     FAIL_TO_SEND_EMAIL("이메일 전송에 실패했습니다."),
     FAIL_TO_AUTH_EMAIL("이메일 인증에 실패했습니다."),
     ALREADY_SIGNUP_EMAIL("이미 가입한 이메일입니다."),
+
+    // 게시글
+    NOT_EXIST_POST("존재하지 않는 게시글입니다."),
+
+    // 파일 업로드
+    FAIL_TO_IMAGE_UPLOAD("파일 업로드에 실패했습니다."),
+
+    // 정렬
+    INVALID_SORT_DIRECTION("정렬 기준이 올바르지 않습니다."),
+
+    // 권한
+    PERMISSION_DENIED("권한이 없습니다."),
+
+    // 인증
+    AUTHORIZATION_ERROR("인증 정보가 올바르지 않습니다."),
     ;
 
     private final String message;

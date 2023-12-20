@@ -44,6 +44,17 @@ jwt:
   secret:
     key: ${jwt-secret-key}
 
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS_KEY_ID}
+      secret-key: ${AWS_SECRET_ACCESS_KEY}
+    s3:
+      bucket: ${s3-bucket-name}
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
 ---
 
 spring:

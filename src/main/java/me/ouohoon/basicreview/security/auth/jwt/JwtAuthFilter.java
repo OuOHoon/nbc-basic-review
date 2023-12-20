@@ -7,6 +7,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import me.ouohoon.basicreview.global.exception.BaseException;
+import me.ouohoon.basicreview.global.exception.ErrorCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -45,7 +47,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 cookie.setMaxAge(0);
                 res.addCookie(cookie);
                 filterChain.doFilter(req, res);
-                return;
+                throw new BaseException(ErrorCode.AUTHORIZATION_ERROR);
             }
 
             Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
@@ -54,7 +56,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 setAuthentication(info.getSubject());
             } catch (Exception e) {
                 log.error(e.getMessage());
-                return;
+                throw new BaseException(ErrorCode.AUTHORIZATION_ERROR);
             }
         }
 

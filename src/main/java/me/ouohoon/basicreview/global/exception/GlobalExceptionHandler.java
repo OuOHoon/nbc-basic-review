@@ -12,4 +12,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<BaseResponse<String>> baseExceptionHandler(BaseException e) {
         return ResponseEntity.badRequest().body(BaseResponse.failure(e.getErrorCode().getMessage()));
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<BaseResponse<String>> internalServerErrorHandler(RuntimeException e) {
+        return ResponseEntity.internalServerError().body(BaseResponse.failure(e.getMessage()));
+    }
 }
