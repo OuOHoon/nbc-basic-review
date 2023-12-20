@@ -17,6 +17,13 @@ public enum ErrorCode {
     // 게시글
     NOT_EXIST_POST("존재하지 않는 게시글입니다."),
 
+    // 댓글
+    NOT_EXIST_COMMENT("존재하지 않는 댓글입니다."),
+
+    // 좋아요
+    ALREADY_LIKE("이미 좋아요를 눌렀습니다."),
+    NOT_EXIST_LIKE("좋아요한 기록이 없습니다."),
+
     // 파일 업로드
     FAIL_TO_IMAGE_UPLOAD("파일 업로드에 실패했습니다."),
 

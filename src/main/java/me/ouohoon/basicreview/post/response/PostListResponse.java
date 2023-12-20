@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class PostFindAllResponse {
+public class PostListResponse {
 
     private String title;
 
@@ -16,7 +16,7 @@ public class PostFindAllResponse {
 
     private LocalDateTime createdAt;
 
-    public PostFindAllResponse(Post post) {
+    public PostListResponse(Post post) {
         this.title = post.getTitle();
         this.nickname = post.getUser().getNickname();
         this.createdAt = post.getCreatedAt();

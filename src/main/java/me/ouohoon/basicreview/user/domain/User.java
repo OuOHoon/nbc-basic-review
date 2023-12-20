@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import me.ouohoon.basicreview.global.domain.BaseEntity;
 import me.ouohoon.basicreview.user.request.SignUpRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -14,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
-public class User {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue

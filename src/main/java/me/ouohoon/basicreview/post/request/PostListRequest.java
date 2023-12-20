@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostFindAllRequest {
+public class PostListRequest {
 
     private int page = 0;
 
@@ -21,7 +21,7 @@ public class PostFindAllRequest {
     private List<SortOption> sortOptions =
             new ArrayList<>(List.of(new SortOption("createdAt", "desc")));
 
-    public PostFindAllRequest(int page, int size) {
+    public PostListRequest(int page, int size) {
         this.page = page;
         this.size = size;
     }

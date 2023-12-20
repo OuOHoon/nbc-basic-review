@@ -4,20 +4,18 @@ import lombok.RequiredArgsConstructor;
 import me.ouohoon.basicreview.global.dto.BaseResponse;
 import me.ouohoon.basicreview.global.dto.SortOption;
 import me.ouohoon.basicreview.post.request.PostCreateRequest;
-import me.ouohoon.basicreview.post.request.PostFindAllRequest;
+import me.ouohoon.basicreview.post.request.PostListRequest;
 import me.ouohoon.basicreview.post.request.PostUpdateRequest;
 import me.ouohoon.basicreview.post.response.PostDetailResponse;
-import me.ouohoon.basicreview.post.response.PostFindAllResponse;
+import me.ouohoon.basicreview.post.response.PostListResponse;
 import me.ouohoon.basicreview.post.service.PostService;
 import me.ouohoon.basicreview.security.auth.jwt.UserDetailsImpl;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,24 +26,24 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public ResponseEntity<BaseResponse<List<PostFindAllResponse>>> findAll(
+    public ResponseEntity<BaseResponse<List<PostListResponse>>> findAll(
             @RequestParam(defaultValue = "0", required = false) int page,
             @RequestParam(defaultValue = "5", required = false) int size,
             @RequestParam(required = false) List<String> sorts
     ) {
-        PostFindAllRequest request;
+        PostListRequest request;
         if (sorts == null) {
-            request = new PostFindAllRequest(page, size);
+            request = new PostListRequest(page, size);
         }
         else {
             List<SortOption> options = sorts.stream().map((sort) -> {
                 String[] keyOption = sort.split(",");
                 return new SortOption(keyOption[0], keyOption[1]);
             }).toList();
-            request = new PostFindAllRequest(page, size, options);
+            request = new PostListRequest(page, size, options);
         }
 
-        List<PostFindAllResponse> posts = postService.findAll(request);
+        List<PostListResponse> posts = postService.findAll(request);
         return ResponseEntity.ok(BaseResponse.success(posts));
     }
 
