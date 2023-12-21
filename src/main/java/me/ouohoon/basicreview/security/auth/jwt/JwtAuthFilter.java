@@ -43,20 +43,19 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             if (!jwtUtil.validateToken(tokenValue)) {
                 log.error("Token Error");
-                Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
-                cookie.setMaxAge(0);
-                res.addCookie(cookie);
-                filterChain.doFilter(req, res);
-                throw new BaseException(ErrorCode.AUTHORIZATION_ERROR);
-            }
 
-            Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
+                if (!req.getMethod().equalsIgnoreCase("GET")) {
+                    handleExceptionResponse(res);
+                    return;
+                }
+            } else {
+                Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
 
-            try {
-                setAuthentication(info.getSubject());
-            } catch (Exception e) {
-                log.error(e.getMessage());
-                throw new BaseException(ErrorCode.AUTHORIZATION_ERROR);
+                try {
+                    setAuthentication(info.getSubject());
+                } catch (Exception e) {
+                    log.error(e.getMessage());
+                }
             }
         }
 
@@ -75,5 +74,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private Authentication createAuthentication(String username) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+    }
+
+    private void handleExceptionResponse(HttpServletResponse response) throws IOException {
+        Cookie cookie = new Cookie(JwtUtil.AUTHORIZATION_HEADER, null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"status\": false, \"payload\": \"Unauthorized user\"}");
     }
 }

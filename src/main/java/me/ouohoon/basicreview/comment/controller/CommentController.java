@@ -36,7 +36,7 @@ public class CommentController {
     ) {
         List<Order> orders = new ArrayList<>();
         if (sorts != null) {
-            sorts.stream().map((sort) -> {
+            orders = sorts.stream().map((sort) -> {
                 String[] keyOption = sort.split(",");
                 return new Order(
                         Sort.Direction.fromOptionalString(keyOption[1])
