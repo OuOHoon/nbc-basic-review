@@ -22,7 +22,7 @@ public class LoggingAspect {
                     joinPoint.getSignature().getDeclaringType().getName(), joinPoint.getSignature().getName());
             return proceed;
         } catch (Throwable e) {
-            log.error("Method Exception:");
+            log.error("Method Exception: {}", e.getMessage());
             throw e;
         }
     }

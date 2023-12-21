@@ -44,7 +44,7 @@ public class PostServiceImpl implements PostService {
         Sort sort = Sort.by(orders);
 
         Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), sort);
-        Page<Post> posts = postRepository.findAll(pageable);
+        Page<Post> posts = postRepository.findAllWithQueryDsl(pageable);
         return posts.stream().map(PostListResponse::new).toList();
     }
 
