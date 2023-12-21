@@ -1,50 +1,26 @@
 package me.ouohoon.basicreview.like.service;
 
-import lombok.RequiredArgsConstructor;
 import me.ouohoon.basicreview.global.exception.BaseException;
 import me.ouohoon.basicreview.global.exception.ErrorCode;
 import me.ouohoon.basicreview.like.domain.Like;
 import me.ouohoon.basicreview.like.domain.LikeId;
-import me.ouohoon.basicreview.like.repository.LikeRepository;
 import me.ouohoon.basicreview.post.domain.Post;
-import me.ouohoon.basicreview.post.repository.PostRepository;
 import me.ouohoon.basicreview.user.domain.User;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@RequiredArgsConstructor
-public class LikeService {
+public interface LikeService {
 
-    private final LikeRepository likeRepository;
-    private final PostRepository postRepository;
+    /**
+     * 게시글 좋아요
+     * @param postId 좋아요할 게시글 id
+     * @param user 요청 유저
+     */
+    void like(Long postId, User user);
 
-    @Transactional
-    public void like(Long postId, User user) {
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_POST));
-
-        if (likeRepository.existsById(new LikeId(user.getId(), postId))) {
-            throw new BaseException(ErrorCode.ALREADY_LIKE);
-        }
-
-        Like like = new Like(new LikeId(user.getId(), post.getId()), user, post);
-
-        likeRepository.save(like);
-    }
-
-    @Transactional
-    public void unlike(Long postId, User user) {
-        if (!postRepository.existsById(postId)) {
-            throw new BaseException(ErrorCode.NOT_EXIST_POST);
-        }
-
-        Like like = likeRepository.findById(new LikeId(user.getId(), postId))
-                .orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_LIKE));
-        if (!like.getUser().getId().equals(user.getId())) {
-            throw new BaseException(ErrorCode.PERMISSION_DENIED);
-        }
-
-        likeRepository.delete(like);
-    }
+    /**
+     * 게시글 좋아요 취소
+     * @param postId 좋아요 취소할 게시글 id
+     * @param user 요청 유저
+     */
+    void unlike(Long postId, User user);
 }

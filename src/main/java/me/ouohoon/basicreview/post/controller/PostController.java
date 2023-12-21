@@ -9,6 +9,7 @@ import me.ouohoon.basicreview.post.request.PostUpdateRequest;
 import me.ouohoon.basicreview.post.response.PostDetailResponse;
 import me.ouohoon.basicreview.post.response.PostListResponse;
 import me.ouohoon.basicreview.post.service.PostService;
+import me.ouohoon.basicreview.post.service.PostServiceImpl;
 import me.ouohoon.basicreview.security.auth.jwt.UserDetailsImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
