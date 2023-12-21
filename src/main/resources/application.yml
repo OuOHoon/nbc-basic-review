@@ -25,12 +25,11 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${mail-username}
-    password: ${mail-password}
+    username: ${mail_username}
+    password: ${mail_password}
     from: basic-review@proejct.com
     properties:
       mail:
@@ -39,22 +38,21 @@ spring:
           timeout: 5000
           starttls.required: true
           starttls.enable: true
-
 jwt:
   secret:
-    key: ${jwt-secret-key}
-
+    key: ${jwt_secret_key}
 cloud:
   aws:
     credentials:
       access-key: ${AWS_ACCESS_KEY_ID}
       secret-key: ${AWS_SECRET_ACCESS_KEY}
     s3:
-      bucket: ${s3-bucket-name}
+      bucket: ${s3_bucket_name}
     region:
       static: ap-northeast-2
     stack:
       auto: false
+
 ---
 
 spring:
@@ -77,12 +75,11 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${mail-username}
-    password: ${mail-password}
+    username: ${mail_username}
+    password: ${mail_password}
     from: basic-review@proejct.com
     properties:
       mail:
@@ -91,18 +88,16 @@ spring:
           timeout: 5000
           starttls.required: true
           starttls.enable: true
-
 jwt:
   secret:
-    key: bmV3c2ZlZWQtand0LXNlY3JldC1rZXluZXdzZmVlZC1qd3Qtc2VjcmV0LWtleQ==
-
+    key: ${jwt_secret_key}
 cloud:
   aws:
     credentials:
       access-key: ${AWS_ACCESS_KEY_ID}
       secret-key: ${AWS_SECRET_ACCESS_KEY}
     s3:
-      bucket: ${s3-bucket-name}
+      bucket: ${s3_bucket_name}
     region:
       static: ap-northeast-2
     stack:
