@@ -26,6 +26,9 @@ public class PostController {
 
     private final PostService postService;
 
+    /**
+     * 조회 파라미터 정렬 url은 /posts?sorts=createdAt-asc,modifiedAt-desc 형식입니다
+     */
     @GetMapping
     public ResponseEntity<BaseResponse<List<PostListResponse>>> findAll(
             @RequestParam(defaultValue = "0", required = false) int page,
@@ -38,7 +41,7 @@ public class PostController {
         }
         else {
             List<SortOption> options = sorts.stream().map((sort) -> {
-                String[] keyOption = sort.split(",");
+                String[] keyOption = sort.split("-");
                 return new SortOption(keyOption[0], keyOption[1]);
             }).toList();
             request = new PostListRequest(page, size, options);
