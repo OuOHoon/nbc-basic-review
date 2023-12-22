@@ -1,5 +1,7 @@
 # 플러스 주차 복습과제 + 스프링 심화 코드 개선 과제
 
+postman 문서: https://documenter.getpostman.com/view/17745457/2s9YkrazQa
+
 - 💬  12/12 - 회원 가입 API
     - [X]  닉네임, 비밀번호, 비밀번호 확인을 **request**에서 전달받기
     - [X]  닉네임은 최소 3자 이상, 알파벳 대소문자(a~z, A~Z), 숫자(0~9)로 구성하기
